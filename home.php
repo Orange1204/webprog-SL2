@@ -40,16 +40,23 @@
 <body>
     <header>
         <b>Aplikasi Pengolahan Keuangan</b>
-        <nav>
-            <a href="home.php" style="border-bottom: 2px solid #000;">Home</a>
-            <a href="profile.php">Profile</a>
+        <nav>           
+            <?php 
+                echo "<a href='home.php?id=".$_GET['id']."' style='border-bottom: 2px solid #000;'>Home</a>";
+                echo "<a href='profile.php?id=".$_GET['id']."'>Profile</a>";
+            ?>        
         </nav>
         <a href="logout.php">Logout</a>
     </header>
 
     <?php
-        session_start();     
-        echo "<p>Halo <b>".$_SESSION['nama-depan']." ".$_SESSION['nama-tengah']." ".$_SESSION['nama-belakang']."</b>, Selamat datang di Aplikasi Pengolahan Keuangan</p>";
+        include("config.php");
+
+        $str_query = "SELECT * FROM user_profile WHERE username = '$_GET[id]'";
+        $query = mysqli_query($connection, $str_query);
+        $row = mysqli_fetch_array($query);   
+
+        echo "<p>Halo <b>".$row['nama-depan']." ".$row['nama-tengah']." ".$row['nama-belakang']."</b>, Selamat datang di Aplikasi Pengolahan Keuangan</p>";
     ?>
 </body>
 </html>

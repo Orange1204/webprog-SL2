@@ -5,6 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
+
+    <script type="text/javascript">
+        function confirm_alert(node) {
+            if (confirm("Are you sure to delete?")){  
+                    return true;
+            } else {
+                alert("Canceled");
+                return false;
+            }
+        }
+    </script>
 </head>
 
 <style>
@@ -22,12 +33,15 @@
         align-items: center;
         background-color: #f9ffca;
         padding: 10px 2%; 
-        margin-bottom: 5%;     
+        margin-bottom: 4%;     
+    }
+
+    .navText {
+        text-decoration: none;
+        color: #000;
     }
 
     a {
-        text-decoration: none;
-        color: #000;
         font-size: 18px;
     }
 
@@ -54,78 +68,95 @@
         border: none;
     }
 
+    img {
+        width: 75px;
+        height: 75px;
+    }
 </style>
 
 <body>
     <header>
         <b>Aplikasi Pengolahan Keuangan</b>
         <nav>
-            <a href="home.php">Home</a>
-            <a href="profile.php" style="border-bottom: 2px solid #000;">Profile</a>
+            <?php 
+                echo "<a class='navText' href='home.php?id=".$_GET['id']."'>Home</a>";
+                echo "<a class='navText' href='profile.php?id=".$_GET['id']."' style='border-bottom: 2px solid #000;'>Profile</a>";
+            ?> 
         </nav>
         <a href="logout.php">Logout</a>
     </header>
-    <h4>Profil Pribadi</h4>
+    <b style="font-size: 28px;">Profil Pribadi</b><br>
     <?php
-        session_start();        
-            echo "
-                <div class='table-container'>
-                <table class='left-table' cellpadding='10'>
-                    <tr>
-                        <td>Nama Depan</td>
-                        <td><b>".$_SESSION["nama-depan"]."</b></td>
-                    </tr>
-                    <tr>
-                        <td>Tempat Lahir</td>
-                        <td><b>".$_SESSION["tempat-lahir"]."</b></td>
-                    </tr>
-                    <tr>
-                        <td>Warga Negara</td>
-                        <td><b>".$_SESSION["warga-negara"]."</b></td>
-                    </tr>
-                    <tr>
-                        <td>Alamat</td>
-                        <td><b>".$_SESSION["alamat"]."</b></td>
-                    </tr>  
-            
-                <table class='middle-table' cellpadding='10'>
-                    <tr>
-                        <td>Nama Tengah</td>
-                        <td><b>".$_SESSION["nama-tengah"]."</b></td>
-                    </tr>
-                    <tr>
-                        <td>Tgl Lahir</td>
-                        <td><b>".$_SESSION["tgl-lahir"]."</b></td>
-                    </tr>
-                    <tr>
-                        <td>Email</td>
-                        <td><b>".$_SESSION["email"]."</b></td>
-                    </tr>
-                    <tr>
-                        <td>Kode Pos</td>
-                        <td><b>".$_SESSION["kode-pos"]."</b></td>
-                    </tr>   
-                </table>
+        echo "<a href='edit.php?id=".$_GET['id']."'>Edit</a>&nbsp&nbsp"; 
+        echo "<a href='delete.php?id=".$_GET['id']."' onclick='return confirm_alert(this);'>Delete</a>";
+    ?>
+    
+    <?php
+        include("config.php");
 
-                <table class='right-table' cellpadding='10'>
-                    <tr>
-                        <td>Nama Belakang</td>
-                        <td><b>".$_SESSION["nama-belakang"]."</b></td>
-                    </tr>
-                    <tr>
-                        <td>NIK</td>
-                        <td><b>".$_SESSION["nik"]."</b></td>
-                    </tr>
-                    <tr>
-                        <td>No HP</td>
-                        <td><b>".$_SESSION["phone"]."</b></td>
-                    </tr>
-                    <tr>
-                        <td>Foto Profil</td>
-                        <td><img src='".$_SESSION["foto-profil"]."' alt='picture'/ width='75px' height='75px'></td>
-                    </tr>   
-                </table>
-            </div> ";
+        $str_query = "SELECT * FROM user_profile WHERE username = '$_GET[id]'";
+        $query = mysqli_query($connection, $str_query);
+        $row = mysqli_fetch_array($query); 
+
+        echo "
+            <div class='table-container'>
+            <table class='left-table' cellpadding='10'>
+                <tr>
+                    <td>Nama Depan</td>
+                    <td><b>".$row["nama-depan"]."</b></td>
+                </tr>
+                <tr>
+                    <td>Tempat Lahir</td>
+                    <td><b>".$row["tempat-lahir"]."</b></td>
+                </tr>
+                <tr>
+                    <td>Warga Negara</td>
+                    <td><b>".$row["warga-negara"]."</b></td>
+                </tr>
+                <tr>
+                    <td>Alamat</td>
+                    <td><b>".$row["alamat"]."</b></td>
+                </tr>  
+        
+            <table class='middle-table' cellpadding='10'>
+                <tr>
+                    <td>Nama Tengah</td>
+                    <td><b>".$row["nama-tengah"]."</b></td>
+                </tr>
+                <tr>
+                    <td>Tgl Lahir</td>
+                    <td><b>".$row["tgl-lahir"]."</b></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td><b>".$row["email"]."</b></td>
+                </tr>
+                <tr>
+                    <td>Kode Pos</td>
+                    <td><b>".$row["kode-pos"]."</b></td>
+                </tr>   
+            </table>
+
+            <table class='right-table' cellpadding='10'>
+                <tr>
+                    <td>Nama Belakang</td>
+                    <td><b>".$row["nama-belakang"]."</b></td>
+                </tr>
+                <tr>
+                    <td>NIK</td>
+                    <td><b>".$row["nik"]."</b></td>
+                </tr>
+                <tr>
+                    <td>No HP</td>
+                    <td><b>".$row["phone"]."</b></td>
+                </tr>
+                <tr>
+                    <td>Foto Profil</td>
+                    <td><img src='data:image/png;base64,".base64_encode($row['foto-profil'])."'/></td>
+                </tr>   
+            </table>
+        </div> ";
     ?>
 </body>
 </html>
+

@@ -85,7 +85,7 @@
                 <table class="left-table" cellpadding="5">
                     <tr>
                         <td>Nama Depan</td>
-                        <td><input type="text" name="nama-depan" pattern="[A-Za-z ]{3,20}" title="Must contain at least 3-20 letters" required></td>
+                        <td><input type="text" name="nama-depan" pattern="[A-Za-z ]{3,15}" title="Must contain at least 3-15 letters" required></td>
                     </tr>
                     <tr>
                         <td>Tempat Lahir</td>
@@ -101,17 +101,16 @@
                     </tr>
                     <tr>
                         <td>Username</td>
-                        <td><input type="text" name="username" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number, one uppercase, one lowercase letter, and at least 8 or more characters" required></td>
+                        <td><input type="text" name="username" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,30}" title="Must contain at least one number, one uppercase, one lowercase letter, and at least 8-30 characters" required></td>
                     </tr>     
             
                 <table class="middle-table" cellpadding="5">
                     <tr>
                         <td>Nama Tengah</td>
-                        <td><input type="text" name="nama-tengah" pattern="[A-Za-z ]{3,20}" title="Must contain at least 3-20 letters" required></td>
+                        <td><input type="text" name="nama-tengah" pattern="[A-Za-z ]{3,15}" title="Must contain at least 3-15 letters" required></td>
                     </tr>
                     <tr>
                         <td>Tgl Lahir</td>
-                        <!-- <td><input type="text" name="tgl-lahir" placeholder="dd/mm/yyyy" pattern='(?:((?:0[1-9]|1[0-9]|2[0-9])\/(?:0[1-9]|1[0-2])|(?:30)\/(?!02)(?:0[1-9]|1[0-2])|31\/(?:0[13578]|1[02]))\/(?:19|20)[0-9]{2})' required></td> -->
                         <td><input type="date" name="tgl-lahir" min="1940-01-01" max="2015-12-31" required></td>
                     </tr>
                     <tr>
@@ -124,14 +123,14 @@
                     </tr>
                     <tr>
                         <td>Password 1</td>
-                        <td><input type="password" name="password1" title="4 or more characters" pattern=".{4,}" required></td>
+                        <td><input type="password" name="password1" title="Must contain at least 4-20 characters" pattern=".{4,20}" required></td>
                     </tr>     
                 </table>
      
                 <table class="right-table" cellpadding="5">
                     <tr>
                         <td>Nama Belakang</td>
-                        <td><input type="text" name="nama-belakang" pattern="[A-Za-z ]{3,20}" title="Must contain at least 3-20 letters" required></td>
+                        <td><input type="text" name="nama-belakang" pattern="[A-Za-z ]{3,15}" title="Must contain at least 3-15 letters" required></td>
                     </tr>
                     <tr>
                         <td>NIK</td>
@@ -139,7 +138,7 @@
                     </tr>
                     <tr>
                         <td>No HP</td>
-                        <td><input type="tel" name="phone" pattern="^(\+62|62|0)8[1-9][0-9]{6,9}$" title="Must have a valid Indonesian phone number" required></td>
+                        <td><input type="tel" name="phone" pattern="^628[1-9][0-9]{6,9}$" title="Must be start with 628" required></td>
                     </tr>
                     <tr>
                         <td>Foto Profil</td>
@@ -147,7 +146,7 @@
                     </tr>
                     <tr>
                         <td>Password 2</td>
-                        <td><input type="password" name="password2" title="Password must match" pattern=".{4,}" required></td>
+                        <td><input type="password" name="password2" title="Password must match" pattern=".{4,20}" required></td>
                     </tr>     
                 </table>
             </div>

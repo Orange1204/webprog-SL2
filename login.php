@@ -62,7 +62,7 @@
                     </tr>
                 </table>
                 <div class="main-button">
-                <button type="submit" name="submit" style="background-color: #adf59f;">Login</button>
+                    <button type="submit" name="submit" style="background-color: #adf59f;">Login</button>
                     <a href="welcome.php"><button style="background-color: #fdd7ac;">Kembali</button></a>     
                 </div> 
             </div>        
